@@ -54,7 +54,8 @@ void set_env(char *name, char *value, context *curr_ctxt)
 		free(var_env);
 	}
 
-	curr_ctxt->_environ = _reallocdp(curr_ctxt->_environ, i, sizeof(char *) * (i + 2));
+	curr_ctxt->_environ =
+	_reallocdp(curr_ctxt->_environ, i, sizeof(char *) * (i + 2));
 	curr_ctxt->_environ[i] = copy_info(name, value);
 	curr_ctxt->_environ[i + 1] = NULL;
 }

@@ -43,61 +43,6 @@ int cd_shell(context *curr_ctxt)
 	return (1);
 }
 
-
-/**
- * cd_dot - Changes to the parent directory.
- *
- * @curr_ctxt: ctxt relevant (environ).
- *
- * Return: void
- */
-void cd_dot(context *curr_ctxt)
-{
-	char pwd[PATH_MAX];
-	char *dir, *cp_pwd, *cp_strtok_pwd;
-
-	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
-	set_env("OLDPWD", cp_pwd, curr_ctxt);
-	dir = curr_ctxt->args[1];
-	if (_strcmp(".", dir) == 0)
-	{
-		set_env("PWD", cp_pwd, curr_ctxt);
-		free(cp_pwd);
-		return;
-	}
-	if (_strcmp("/", cp_pwd) == 0)
-	{
-		free(cp_pwd);
-		return;
-	}
-	cp_strtok_pwd = cp_pwd;
-	rev_string(cp_strtok_pwd);
-	cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
-
-	while (cp_strtok_pwd != NULL)
-	{
-		cp_strtok_pwd = _strtok(NULL, "\0");
-
-		if (cp_strtok_pwd != NULL)
-			rev_string(cp_strtok_pwd);
-	}
-
-	if (cp_strtok_pwd != NULL)
-	{
-		chdir(cp_strtok_pwd);
-		set_env("PWD", cp_strtok_pwd, curr_ctxt);
-	}
-	else
-	{
-		chdir("/");
-		set_env("PWD", "/", curr_ctxt);
-	}
-
-	curr_ctxt->exit_code = 0;
-	free(cp_pwd);
-}
-
 /**
  * cd_to - Changes to a directory given by the user.
  *

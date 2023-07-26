@@ -10,7 +10,7 @@ int cmp_env_name(const char *nenv, const char *name)
         {
             return (0);
         }
-    }
+	}
 
     return (i + 1);
 }
