@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * get_len - Get the length of a number.
- * @n: The integer number.
- * Return: Length of the number.
+ * num_length - Length of an integer.
+ * @n: integer.
+ * Return: Length.
  */
-int get_len(int n)
+int num_length(int n)
 {
 	unsigned int n1;
 	int length = 1;
@@ -30,14 +30,14 @@ int get_len(int n)
 }
 
 /**
- * aux_itoa - Converts an integer to a string.
- * @n: The integer number.
- * Return: Pointer to the string representation of the number.
+ * itostr - Change integer to a string.
+ * @n: Integer number.
+ * Return: String
  */
-char *aux_itoa(int n)
+char *itostr(int n)
 {
 	unsigned int n1;
-	int length = get_len(n);
+	int length = num_length(n);
 	char *buffer;
 
 	buffer = malloc(sizeof(char) * (length + 1));
@@ -67,9 +67,9 @@ char *aux_itoa(int n)
 }
 
 /**
- * _atoi - Converts a string to an integer.
- * @s: cmd string.
- * Return: The converted integer.
+ * _atoi - Change a string to integer.
+ * @s: String.
+ * Return: Integer.
  */
 int _atoi(char *s)
 {

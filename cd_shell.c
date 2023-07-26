@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * cd_shell - Changes current directory.
+ * cd_shell - Change the current directory.
  *
- * @curr_ctxt: ctxt relevant.
- * Return: 1 on success.
+ * @curr_ctxt: current context.
+ * Return: 1.
  */
 int cd_shell(context *curr_ctxt)
 {
@@ -26,15 +26,15 @@ int cd_shell(context *curr_ctxt)
 		return (1);
 	}
 
-	if (_strcmp("-", dir) == 0)
-	{
-		cd_previous(curr_ctxt);
-		return (1);
-	}
-
 	if (_strcmp(".", dir) == 0 || _strcmp("..", dir) == 0)
 	{
 		cd_dot(curr_ctxt);
+		return (1);
+	}
+
+	if (_strcmp("-", dir) == 0)
+	{
+		cd_previous(curr_ctxt);
 		return (1);
 	}
 
@@ -44,9 +44,9 @@ int cd_shell(context *curr_ctxt)
 }
 
 /**
- * cd_to - Changes to a directory given by the user.
+ * cd_to - Changes to a given directory.
  *
- * @curr_ctxt: ctxt relevant (directories).
+ * @curr_ctxt: current context.
  * Return: void
  */
 void cd_to(context *curr_ctxt)
@@ -78,9 +78,9 @@ void cd_to(context *curr_ctxt)
 }
 
 /**
- * cd_previous - Changes to the previous directory.
+ * cd_previous - Changes to previous directory.
  *
- * @curr_ctxt: ctxt relevant (environ).
+ * @curr_ctxt: current context.
  * Return: void
  */
 void cd_previous(context *curr_ctxt)
@@ -120,9 +120,9 @@ void cd_previous(context *curr_ctxt)
 }
 
 /**
- * cd_to_home - Changes to the home directory.
+ * cd_to_home - Changes to home directory.
  *
- * @curr_ctxt: ctxt relevant (environ).
+ * @curr_ctxt: current context.
  * Return: void
  */
 void cd_to_home(context *curr_ctxt)

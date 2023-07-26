@@ -2,9 +2,10 @@
 
 /**
  * _strcat - Concatenate two strings.
- * @dest: Pointer to the destination buffer.
- * @src: Pointer to the source string.
- * Return: Pointer to the destination buffer.
+ *
+ * @dest: Destination string.
+ * @src: Source string.
+ * Return:Concatenated string.
  */
 char *_strcat(char *dest, const char *src)
 {
@@ -26,10 +27,11 @@ char *_strcat(char *dest, const char *src)
 }
 
 /**
- * _strcpy - Copy the string pointed to by src.
- * @dest: Pointer to the destination buffer.
- * @src: Pointer to the source string.
- * Return: Pointer to the destination buffer.
+ * _strcpy - Copies a string.
+ *
+ * @dest: Destination.
+ * @src: Source.
+ * Return: Copy of source
  */
 char *_strcpy(char *dest, char *src)
 {
@@ -47,9 +49,10 @@ char *_strcpy(char *dest, char *src)
 
 /**
  * _strcmp - Compare two strings.
- * @s1: Pointer to the first string.
- * @s2: Pointer to the second string.
- * Return: 0 if strings are equal, 1 if s1 is greater, -1 if s2 is greater.
+ *
+ * @s1: First string.
+ * @s2: Second string.
+ * Return: 1 or 0
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -66,10 +69,11 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _strchr - Locate a character in a string.
- * @s: Pointer to the string.
- * @c: Character to locate.
- * Return: Pointer to the first occurrence of the character c, or NULL if not found.
+ * _strchr - Find character in string.
+ *
+ * @s: String.
+ * @c: Character to find.
+ * Return: Ptr to first char occurence
  */
 char *_strchr(char *s, char c)
 {
@@ -87,10 +91,11 @@ char *_strchr(char *s, char c)
 }
 
 /**
- * _strspn - Get the length of a prefix substring.
- * @s: Pointer to the initial segment.
- * @accept: Pointer to the accepted bytes.
- * Return: The number of accepted bytes.
+ * _strspn - Get length of a substring.
+ *
+ * @s: String segment
+ * @accept: Accepted bytes
+ * Return: Number of bytes
  */
 int _strspn(char *s, char *accept)
 {

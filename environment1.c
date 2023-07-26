@@ -1,6 +1,13 @@
 #include "shell.h"
 
-int cmp_env_name(const char *nenv, const char *name)
+/**
+ * compare_env - compares env
+ * @nenv: value (env or alias)
+ * @name: name (env or alias)
+ *
+ * Return: 1.
+ */
+int compare_env(const char *nenv, const char *name)
 {
     int i;
 
@@ -15,6 +22,13 @@ int cmp_env_name(const char *nenv, const char *name)
     return (i + 1);
 }
 
+/**
+ * _getenv - returns env
+ * @name: name (env or alias)
+ * @_environ: value (env or alias)
+ *
+ * Return: environment name
+ */
 char *_getenv(const char *name, char **_environ)
 {
     char *ptr_env;
@@ -25,7 +39,7 @@ char *_getenv(const char *name, char **_environ)
 
     for (i = 0; _environ[i]; i++)
     {
-        mov = cmp_env_name(_environ[i], name);
+        mov = compare_env(_environ[i], name);
         if (mov)
         {
             ptr_env = _environ[i];
@@ -36,6 +50,12 @@ char *_getenv(const char *name, char **_environ)
     return (ptr_env + mov);
 }
 
+/**
+ * _env - checks if in environment
+ * @curr_ctxt: current context
+ *
+ * Return: 1.
+ */
 int _env(context *curr_ctxt)
 {
     int i, j;
@@ -54,14 +74,12 @@ int _env(context *curr_ctxt)
     return (1);
 }
 
-
 /**
- * copy_info - copies info to create
- * a new env or alias
+ * copy_info - copies info
  * @name: name (env or alias)
  * @value: value (env or alias)
  *
- * Return: new env or alias.
+ * Return: environment name
  */
 char *copy_info(char *name, char *value)
 {
@@ -83,10 +101,10 @@ char *copy_info(char *name, char *value)
 /**
  * check_vars - Checks if the typed variable is $$ or $?.
  *
- * @h: Head of the linked list.
- * @in: cmd string.
- * @st: Last exit_code of the Shell.
- * @ctxt: ctxt structure.
+ * @h: Head.
+ * @in: command string.
+ * @st: Last exit code.
+ * @ctxt: current context
  * Return: void
  */
 int check_vars(vinfo **h, char *in, char *st, context *ctxt)
@@ -116,7 +134,7 @@ int check_vars(vinfo **h, char *in, char *st, context *ctxt)
 			else if (in[i + 1] == ';')
 				add_vinfo(h, 0, NULL, 0);
 			else
-				check_env(h, in + i, ctxt);
+				isvalid_env(h, in + i, ctxt);
 		}
 		i++;
 	}

@@ -16,19 +16,17 @@
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
 
-/* Referring to an array of pointers to strings, commonly known as the "environment" */
 extern char **environ;
 
-
 /**
- * struct ctxt - A structure that encompasses all essential ctxtary data during runtime.
+ * struct ctxt - A structure for the enviornment context
  * @argv: argument vector
- * @cmd: command line written by the user
- * @args: tokens of the command line
- * @exit_code: last exit_code of the shell
- * @count: lines count
+ * @cmd: input command
+ * @args: command args
+ * @exit_code: exit_code of the shell
+ * @count: line count
  * @_environ: environment variable
- * @pid: process ID of the shell
+ * @pid: process identifier of the shell
  */
 typedef struct ctxt
 {
@@ -43,9 +41,9 @@ typedef struct ctxt
 
 /**
  * struct sep - single linked list
- * @separator: ; | &
+ * @separator: separator (; | &)
  * @next: next node
- * Description: A singly linked list designed to store separators.
+ * Description: linked list to store separators.
  */
 typedef struct sep
 {
@@ -55,9 +53,9 @@ typedef struct sep
 
 /**
  * struct cin - single linked list
- * @line: command line
+ * @line: command
  * @next: next node
- * Description: single linked list to store command lines
+ * Description: linked list to store command lines
  */
 typedef struct cin
 {
@@ -67,11 +65,11 @@ typedef struct cin
 
 /**
  * struct vlist - single linked list
- * @len_var: length of the variable
+ * @len_var: variable length
  * @val: value of the variable
  * @len_val: length of the value
  * @next: next node
- * Description: single linked list to store variables
+ * Description: linked list to store variable info
  */
 typedef struct vlist
 {
@@ -82,9 +80,9 @@ typedef struct vlist
 } vinfo;
 
 /**
- * struct bin - context struct for command args.
- * @name: The name of the command context i.e cd, exit, env
- * @f: ctxt type pointer function.
+ * struct bin - context struct for builtin command.
+ * @name: Command name
+ * @f: environment context
  */
 typedef struct bin
 {
@@ -92,142 +90,113 @@ typedef struct bin
 	int (*f)(context *curr_ctxt);
 } builtin;
 
-/* aux_lists.c */
 separator *add_separator(separator **head, char sep);
 void free_separator(separator **head);
 cmd_line *add_cmd(cmd_line **head, char *line);
 void free_cmd(cmd_line **head);
 
-/* aux_lists2.c */
 vinfo *add_vinfo(vinfo **head, int var_len, char *var, int val_len);
 void free_vinfo(vinfo **head);
 
-/* aux_str functions */
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 
-/* aux_mem.c */
 void _memcpy(void *newptr, const void *ptr, unsigned int size);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
+char **_reallocdptr(char **ptr, unsigned int old_size, unsigned int new_size);
 
-/* aux_str2.c */
 char *_strdup(const char *s);
 int _strlen(const char *s);
 int cmp_chars(char str[], const char *delim);
 char *_strtok(char str[], const char *delim);
 int _isdigit(const char *s);
 
-/* aux_str3.c */
 void rev_string(char *s);
 
-/* check_syntax_error.c */
 int repeated_char(char *cmd, int i);
 int error_sep_op(char *cmd, int i, char last);
 int first_char(char *cmd, int *i);
 void print_syntax_error(context *curr_ctxt, char *cmd, int i, int bool);
 int check_syntax_error(context *curr_ctxt, char *cmd);
 
-/* shell_loop.c */
 char *without_comment(char *in);
 void shell_loop(context *curr_ctxt);
 
-/* read_line.c */
 char *read_line(int *i_eof);
 
-/* split.c */
 char *swap_char(char *cmd, int bool);
 void add_nodes(separator **head_s, cmd_line **head_l, char *cmd);
-void go_next(separator **list_s, cmd_line **list_l, context *curr_ctxt);
+void cmdnav_next(separator **list_s, cmd_line **list_l, context *curr_ctxt);
 int split_commands(context *curr_ctxt, char *cmd);
 char **split_line(char *cmd);
 
-/* rep_var.c */
-void check_env(vinfo **h, char *in, context *ctxt);
+void isvalid_env(vinfo **h, char *in, context *ctxt);
 int check_vars(vinfo **h, char *in, char *st, context *ctxt);
 char *replaced_cmd(vinfo **head, char *cmd, char *new_cmd, int nlen);
 char *rep_var(char *cmd, context *curr_ctxt);
 
-/* get_line.c */
-void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
+void assign_line(char **lineptr, size_t *n, char *buffer, size_t j);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
-/* exec_line */
 int exec_line(context *curr_ctxt);
 
-/* cmd_exec.c */
 int is_cdir(char *path, int *i);
 char *_which(char *cmd, char **_environ);
 int is_executable(context *curr_ctxt);
 int check_error_cmd(char *dir, context *curr_ctxt);
 int cmd_exec(context *curr_ctxt);
 
-/* env1.c */
 char *_getenv(const char *name, char **_environ);
 int _env(context *curr_ctxt);
 
-/* env2.c */
 char *copy_info(char *name, char *value);
 void set_env(char *name, char *value, context *curr_ctxt);
 int _setenv(context *curr_ctxt);
 int _unsetenv(context *curr_ctxt);
 
-/* cd.c */
 void cd_dot(context *curr_ctxt);
 void cd_to(context *curr_ctxt);
 void cd_previous(context *curr_ctxt);
 void cd_to_home(context *curr_ctxt);
 
-/* cd_shell.c */
 int cd_shell(context *curr_ctxt);
 
-/* get_context */
 int (*get_context(char *cmd))(context *curr_ctxt);
 
-/* _exit.c */
 int exit_shell(context *curr_ctxt);
 
-/* aux_stdlib.c */
-int get_len(int n);
-char *aux_itoa(int n);
+int num_length(int n);
+char *itostr(int n);
 int _atoi(char *s);
 
-/* aux_error1.c */
 char *strcat_cd(context *, char *, char *, char *);
 char *error_get_cd(context *curr_ctxt);
 char *error_not_found(context *curr_ctxt);
 char *error_exit_shell(context *curr_ctxt);
 
-/* aux_error2.c */
 char *error_get_alias(char **args);
 char *error_env(context *curr_ctxt);
 char *error_syntax(char **args);
 char *error_permission(char **args);
 char *error_path(context *curr_ctxt);
 
-
-/* get_error.c */
 int get_error(context *curr_ctxt, int eval);
 
-/* get_sigint.c */
-void get_sigint(int sig);
+void sigint_handler(int sig);
 
-/* info_help.c */
 void help_env(void);
 void help_setenv(void);
 void help_unsetenv(void);
 void help(void);
 void help_exit(void);
 
-/* aux_help2.c */
 void info_help(void);
 void help_alias(void);
 void help_cd(void);
 
-/* get_help.c */
 int get_help(context *curr_ctxt);
 
 #endif

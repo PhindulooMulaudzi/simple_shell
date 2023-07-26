@@ -1,8 +1,9 @@
 #include "shell.h"
 
 /**
- * _strdup - Duplicate a string in the heap memory.
- * @s: Pointer to the cmd string.
+ * _strdup - Creates string copy
+ *
+ * @s: string to be evaluated.
  * Return: Duplicated string on success, NULL on failure.
  */
 char *_strdup(const char *s)
@@ -19,9 +20,10 @@ char *_strdup(const char *s)
 }
 
 /**
- * _strlen - Returns the length of a string.
- * @s: Pointer to the cmd string.
- * Return: The length of the string.
+ * _strlen - Return string length
+ *
+ * @s: String
+ * Return: int string length
  */
 int _strlen(const char *s)
 {
@@ -34,11 +36,11 @@ int _strlen(const char *s)
 }
 
 /**
- * cmp_chars - Compare characters of strings.
- * @str: cmd string.
+ * cmp_chars - Compare characters in string.
+ * @str: Command string.
  * @delim: Delimiter string.
  *
- * Return: 1 if characters are equal, 0 otherwise.
+ * Return: 1 or 0
  */
 int cmp_chars(char str[], const char *delim)
 {
@@ -61,11 +63,11 @@ int cmp_chars(char str[], const char *delim)
 }
 
 /**
- * _strtok - Splits a string by a given delimiter.
- * @str: cmd string.
- * @delim: Delimiter string.
+ * _strtok - Tokenizes a string.
  *
- * Return: A pointer to the next token, NULL if no more tokens.
+ * @str: Command string.
+ * @delim: Delimiter string.
+ * Return: Token ptr.
  */
 char *_strtok(char str[], const char *delim)
 {
@@ -77,21 +79,20 @@ char *_strtok(char str[], const char *delim)
 	{
 		if (cmp_chars(str, delim))
 			return (NULL);
-		splitted = str; /* Store the first address */
+		splitted = str;
 		i = _strlen(str);
-		str_end = &str[i]; /* Store the last address */
+		str_end = &str[i];
 	}
 	str_start = splitted;
-	if (str_start == str_end) /* Reaching the end */
+	if (str_start == str_end)
 		return (NULL);
 
 	for (bool = 0; *splitted; splitted++)
 	{
-		/* Breaking the loop finding the next token */
 		if (splitted != str_start)
 			if (*splitted && *(splitted - 1) == '\0')
 				break;
-		/* Replacing delimiter for a null char */
+
 		for (i = 0; delim[i]; i++)
 		{
 			if (*splitted == delim[i])
@@ -102,19 +103,19 @@ char *_strtok(char str[], const char *delim)
 				break;
 			}
 		}
-		if (bool == 0 && *splitted) /* Str != Delim */
+		if (bool == 0 && *splitted)
 			bool = 1;
 	}
-	if (bool == 0) /* Str == Delim */
+	if (bool == 0)
 		return (NULL);
 	return (str_start);
 }
 
 /**
- * _isdigit - Defines if a string contains only digits (0-9).
+ * _isdigit - Check if stirng char is digit
  *
- * @s: cmd string.
- * Return: 1 if the string contains only digits, 0 otherwise.
+ * @s: string.
+ * Return: 1 or 0
  */
 int _isdigit(const char *s)
 {

@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * get_context - context that pais the command in the arg
+ * get_context - context for the command
  * @cmd: command
- * Return: function pointer of the context command
+ * Return: context ptr
  */
 int (*get_context(char *cmd))(context *)
 {
@@ -28,12 +28,12 @@ int (*get_context(char *cmd))(context *)
 }
 
 /**
- * set_env - sets an environment variable
+ * set_env - sets environment variable
  *
- * @name: name of the environment variable
- * @value: value of the environment variable
- * @curr_ctxt: ctxt structure (environ)
- * Return: no return
+ * @name: variable name
+ * @value: variable value
+ * @curr_ctxt: context
+ * Return: void
  */
 void set_env(char *name, char *value, context *curr_ctxt)
 {
@@ -55,17 +55,16 @@ void set_env(char *name, char *value, context *curr_ctxt)
 	}
 
 	curr_ctxt->_environ =
-	_reallocdp(curr_ctxt->_environ, i, sizeof(char *) * (i + 2));
+	_reallocdptr(curr_ctxt->_environ, i, sizeof(char *) * (i + 2));
 	curr_ctxt->_environ[i] = copy_info(name, value);
 	curr_ctxt->_environ[i + 1] = NULL;
 }
 
 /**
- * _setenv - compares env variables names
- * with the name passed.
- * @curr_ctxt: ctxt relevant (env name and env value)
+ * _setenv - compares environment variables
+ * @curr_ctxt: current context.
  *
- * Return: 1 on success.
+ * Return: 1.
  */
 int _setenv(context *curr_ctxt)
 {
@@ -82,11 +81,11 @@ int _setenv(context *curr_ctxt)
 }
 
 /**
- * _unsetenv - deletes a environment variable
+ * _unsetenv - deletes environment variable
  *
- * @curr_ctxt: ctxt relevant (env name)
+ * @curr_ctxt: current context.
  *
- * Return: 1 on success.
+ * Return: 1.
  */
 int _unsetenv(context *curr_ctxt)
 {
@@ -132,14 +131,14 @@ int _unsetenv(context *curr_ctxt)
 }
 
 /**
- * check_env - Checks if the typed variable is an environment variable.
+ * isvalid_env - Checks if variable is an environment variable.
  *
  * @h: Head of linked list.
- * @in: cmd string.
- * @ctxt: ctxt structure.
+ * @in: command string.
+ * @ctxt: current context.
  * Return: void
  */
-void check_env(vinfo **h, char *in, context *ctxt)
+void isvalid_env(vinfo **h, char *in, context *ctxt)
 {
 	int row, chr, j, val_len;
 	char **_envr;

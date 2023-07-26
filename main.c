@@ -1,19 +1,19 @@
 #include "shell.h"
 
 /**
- * get_sigint - Handle the crtl + c call in prompt
+ * sigint_handler - Handle crtl + c call
  * @sig: Signal handler
  */
-void get_sigint(int sig)
+void sigint_handler(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n:) ", 5);
 }
 
 /**
- * free_ctxt - Free ctxt structure.
+ * free_ctxt - Free current context.
  *
- * @curr_ctxt: The ctxt structure to be freed.
+ * @curr_ctxt: The current context to be freed.
  * Return: void.
  */
 void free_ctxt(context *curr_ctxt)
@@ -30,9 +30,9 @@ void free_ctxt(context *curr_ctxt)
 }
 
 /**
- * set_ctxt - Initialize ctxt structure.
+ * set_ctxt - Set current context.
  *
- * @curr_ctxt: The ctxt structure to be initialized.
+ * @curr_ctxt: Context
  * @argv: Argument vector.
  * Return: void.
  */
@@ -57,23 +57,23 @@ void set_ctxt(context *curr_ctxt, char **argv)
 	}
 
 	curr_ctxt->_environ[i] = NULL;
-	curr_ctxt->pid = aux_itoa(getpid());
+	curr_ctxt->pid = itostr(getpid());
 }
 
 /**
- * main - Entry point of the program.
+ * main - Entry point.
  *
- * @ac: Argument count.
+ * @argc: Argument count.
  * @argv: Argument vector.
  *
  * Return: 0 on success.
  */
-int main(int ac, char **argv)
+int main(int argc, char **argv)
 {
 	context curr_ctxt;
-	(void) ac;
+	(void) argc;
 
-	signal(SIGINT, get_sigint);
+	signal(SIGINT, sigint_handler);
 	set_ctxt(&curr_ctxt, argv);
 	shell_loop(&curr_ctxt);
 	free_ctxt(&curr_ctxt);

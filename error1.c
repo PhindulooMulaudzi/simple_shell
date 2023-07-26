@@ -48,7 +48,7 @@ char *error_get_cd(context *curr_ctxt)
 	int length, len_id;
 	char *error, *ver_str, *msg;
 
-	ver_str = aux_itoa(curr_ctxt->count);
+	ver_str = itostr(curr_ctxt->count);
 	if (curr_ctxt->args[1][0] == '-')
 	{
 		msg = ": Illegal option ";
@@ -88,7 +88,7 @@ char *error_not_found(context *curr_ctxt)
 	char *error;
 	char *ver_str;
 
-	ver_str = aux_itoa(curr_ctxt->count);
+	ver_str = itostr(curr_ctxt->count);
 	length = _strlen(curr_ctxt->argv[0]) + _strlen(ver_str);
 	length += _strlen(curr_ctxt->args[0]) + 16;
 	error = malloc(sizeof(char) * (length + 1));
@@ -121,7 +121,7 @@ char *error_exit_shell(context *curr_ctxt)
 	char *error;
 	char *ver_str;
 
-	ver_str = aux_itoa(curr_ctxt->count);
+	ver_str = itostr(curr_ctxt->count);
 	length = _strlen(curr_ctxt->argv[0]) + _strlen(ver_str);
 	length += _strlen(curr_ctxt->args[0]) + _strlen(curr_ctxt->args[1]) + 23;
 	error = malloc(sizeof(char) * (length + 1));
@@ -155,7 +155,7 @@ char *error_env(context *curr_ctxt)
 	char *ver_str;
 	char *msg;
 
-	ver_str = aux_itoa(curr_ctxt->count);
+	ver_str = itostr(curr_ctxt->count);
 	msg = ": Unable to add/remove from environment\n";
 	length = _strlen(curr_ctxt->argv[0]) + _strlen(ver_str);
 	length += _strlen(curr_ctxt->args[0]) + _strlen(msg) + 4;

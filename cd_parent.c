@@ -3,7 +3,7 @@
 /**
  * set_oldpwd - helper to the cd dot method.
  *
- * @curr_ctxt: ctxt relevant (environ).
+ * @curr_ctxt: current context.
  *
  * Return: void
  */
@@ -20,7 +20,7 @@ void set_oldpwd(context *curr_ctxt) {
 /**
  * update_pwd - helper to the cd dot method.
  *
- * @curr_ctxt: ctxt relevant (environ).
+ * @curr_ctxt: current context.
  *
  * Return: void
  */
@@ -30,9 +30,9 @@ void update_pwd(char *new_pwd, context *curr_ctxt) {
 }
 
 /**
- * cd_dot - Changes to the parent directory.
+ * cd_dot - Changes to parent directory.
  *
- * @curr_ctxt: ctxt relevant (environ).
+ * @curr_ctxt: current context.
  *
  * Return: void
  */

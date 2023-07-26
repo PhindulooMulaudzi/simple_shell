@@ -44,7 +44,7 @@ void help_cd(void)
 
 /**
  * get_help - function that retrieves help messages according context
- * @curr_ctxt: ctxt structure (args and cmd)
+ * @curr_ctxt: current context (args and cmd)
  * Return: Return 0
 */
 int get_help(context *curr_ctxt)

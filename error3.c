@@ -11,7 +11,7 @@ char *error_path(context *curr_ctxt)
 	char *ver_str;
 	char *error;
 
-	ver_str = aux_itoa(curr_ctxt->count);
+	ver_str = itostr(curr_ctxt->count);
 	length = _strlen(curr_ctxt->argv[0]) + _strlen(ver_str);
 	length += _strlen(curr_ctxt->args[0]) + 24;
 	error = malloc(sizeof(char) * (length + 1));
@@ -34,7 +34,7 @@ char *error_path(context *curr_ctxt)
 
 /**
  * get_error - calls the error according the context, syntax or permission
- * @curr_ctxt: ctxt structure that contains arguments
+ * @curr_ctxt: current context that contains arguments
  * @eval: error value
  * Return: error
  */
@@ -71,6 +71,12 @@ int get_error(context *curr_ctxt, int eval)
 	return (eval);
 }
 
+/**
+ * check_error_cmd - calls the error according the context, syntax or permission
+ * @dir: current context that contains arguments
+ * @curr_ctxt: error value
+ * Return: 1 or -1
+ */
 int check_error_cmd(char *dir, context *curr_ctxt)
 {
 	int i = 0;

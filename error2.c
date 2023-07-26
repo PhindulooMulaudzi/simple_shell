@@ -3,7 +3,7 @@
 /**
  * count_repeated_char - counts the repetitions of a char
  *
- * @cmd: cmd string
+ * @cmd: command string
  * @i: index
  * Return: repetitions
  */
@@ -15,11 +15,10 @@ int count_repeated_char(char *cmd, int i)
 	return (i);
 }
 
-
 /**
  * find_syntax_error - finds syntax errors
  *
- * @cmd: cmd string
+ * @cmd: command string
  * @i: index
  * @last: last char read
  * Return: index of error. 0 when there are no errors
@@ -71,7 +70,7 @@ int find_syntax_error(char *cmd, int i, char last)
 /**
  * find_first_char - finds index of the first char
  *
- * @cmd: cmd string
+ * @cmd: command string
  * @i: index
  * Return: 1 if there is an error. 0 in other cases.
  */
@@ -94,11 +93,11 @@ int find_first_char(char *cmd, int *i)
 /**
  * print_syntax_error - prints when a syntax error is found
  *
- * @curr_ctxt: ctxt structure
- * @cmd: cmd string
+ * @curr_ctxt: current context
+ * @cmd: command string
  * @i: index of the error
  * @bool: to control message error
- * Return: no return
+ * Return: void
  */
 void print_syntax_error(context *curr_ctxt, char *cmd, int i, int bool)
 {
@@ -121,7 +120,7 @@ void print_syntax_error(context *curr_ctxt, char *cmd, int i, int bool)
 
 	msg2 = ": Syntax error: \"";
 	msg3 = "\" unexpected\n";
-	count = aux_itoa(curr_ctxt->count);
+	count = itostr(curr_ctxt->count);
 	length = _strlen(curr_ctxt->argv[0]) + _strlen(count);
 	length += _strlen(msg) + _strlen(msg2) + _strlen(msg3) + 2;
 
@@ -147,8 +146,8 @@ void print_syntax_error(context *curr_ctxt, char *cmd, int i, int bool)
 /**
  * check_syntax_error - intermediate function to find and print a syntax error
  *
- * @curr_ctxt: ctxt structure
- * @cmd: cmd string
+ * @curr_ctxt: current context
+ * @cmd: command string
  * Return: 1 if there is an error. 0 in other cases
  */
 int check_syntax_error(context *curr_ctxt, char *cmd)

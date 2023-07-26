@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * bring_line - assigns the line var for get_line
- * @lineptr: Buffer that store the cmd str
- * @buffer: str that is been called to line
- * @n: size of line
- * @j: size of buffer
+ * assign_line - assigns the line var for get_line
+ * @lineptr: Buffer to store cmd str
+ * @buffer: string to be assigned
+ * @n: line size
+ * @j: bud size
  */
-void bring_line(char **lineptr, size_t *n, char *buffer, size_t j)
+void assign_line(char **lineptr, size_t *n, char *buffer, size_t j)
 {
 
 	if (*lineptr == NULL)
@@ -34,11 +34,11 @@ void bring_line(char **lineptr, size_t *n, char *buffer, size_t j)
 	}
 }
 /**
- * get_line - Read inpt from stream
- * @lineptr: buffer that stores the cmd
- * @n: size of lineptr
+ * get_line - Get inpt from stream
+ * @lineptr: buffer
+ * @n: size
  * @stream: stream to read from
- * Return: The number of bytes
+ * Return: number of bytes
  */
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
@@ -76,7 +76,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 		cmd++;
 	}
 	buffer[cmd] = '\0';
-	bring_line(lineptr, n, buffer, cmd);
+	assign_line(lineptr, n, buffer, cmd);
 	retval = cmd;
 	if (i != 0)
 		cmd = 0;
@@ -84,10 +84,10 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 }
 
 /**
- * read_line - Read the cmd string from stdin.
+ * read_line - Read the command string from stdin.
  *
  * @i_eof: Return value of the getline function.
- * Return: The cmd string.
+ * Return: The command string.
  */
 char *read_line(int *i_eof)
 {

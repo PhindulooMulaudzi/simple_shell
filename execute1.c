@@ -3,8 +3,8 @@
 /**
  * exec_line - finds contexts and commands
  *
- * @curr_ctxt: ctxt relevant (args)
- * Return: 1 on success.
+ * @curr_ctxt: Relevant context.
+ * Return: 1.
  */
 int exec_line(context *curr_ctxt)
 {
@@ -51,6 +51,13 @@ int exit_shell(context *curr_ctxt)
 	return (0);
 }
 
+/**
+ * is_cdir - Check if path in directory
+ *
+ * @path: path name
+ * @i: integer code
+ * Return: 1.
+ */
 int is_cdir(char *path, int *i)
 {
 	char *p = path;
@@ -67,6 +74,13 @@ int is_cdir(char *path, int *i)
 	return (0);
 }
 
+/**
+ * _which - Determine command to be executed
+ *
+ * @cmd: Command
+ * @curr_ctxt: Relevant context.
+ * Return: 1.
+ */
 char *_which(char *cmd, char **_environ)
 {
 	char *path, *ptr_path, *token_path, *dir;
@@ -117,6 +131,12 @@ char *_which(char *cmd, char **_environ)
 	return (NULL);
 }
 
+/**
+ * is_executable - Check if command is valid
+ *
+ * @curr_ctxt: Relevant context.
+ * Return: 1.
+ */
 int is_executable(context *curr_ctxt)
 {
 	struct stat st;

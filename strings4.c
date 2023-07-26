@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * add_nodes - Adds separators and command lines to the lists
+ * add_nodes - Add separators note to command lines
  *
- * @head_s: Head of the separator list
- * @head_l: Head of the command lines list
- * @cmd: cmd string
- * Return: No return
+ * @head_s: separator head
+ * @head_l: comand line head
+ * @cmd: command string
+ * Return: void
  */
 void add_nodes(separator **head_s, cmd_line **head_l, char *cmd)
 {
@@ -38,14 +38,14 @@ void add_nodes(separator **head_s, cmd_line **head_l, char *cmd)
 }
 
 /**
- * go_next - Goes to the next command line stored
+ * cmdnav_next - Goes to the next command line stored
  *
  * @list_s: Separator list
  * @list_l: Command line list
- * @curr_ctxt: ctxt structure
- * Return: No return
+ * @curr_ctxt: current context
+ * Return: void
  */
-void go_next(separator **list_s, cmd_line **list_l, context *curr_ctxt)
+void cmdnav_next(separator **list_s, cmd_line **list_l, context *curr_ctxt)
 {
 	int loop_sep;
 	separator *ls_s;
@@ -80,11 +80,11 @@ void go_next(separator **list_s, cmd_line **list_l, context *curr_ctxt)
 }
 
 /**
- * split_commands - Splits command lines according to the separators: ;, |, and & and executes them
+ * split_commands - Splits command lines
  *
- * @curr_ctxt: ctxt structure
- * @cmd: cmd string
- * Return: 0 to exit, 1 to continue
+ * @curr_ctxt: current context
+ * @cmd: command string
+ * Return: 0 or 1
  */
 int split_commands(context *curr_ctxt, char *cmd)
 {
@@ -110,7 +110,7 @@ int split_commands(context *curr_ctxt, char *cmd)
 		if (loop == 0)
 			break;
 
-		go_next(&list_s, &list_l, curr_ctxt);
+		cmdnav_next(&list_s, &list_l, curr_ctxt);
 
 		if (list_l != NULL)
 			list_l = list_l->next;

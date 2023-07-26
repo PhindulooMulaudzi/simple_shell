@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * swap_char - Swaps '|' and '&' for non-printed chars
+ * swap_char - Swaps '|' and '&'
  *
- * @cmd: cmd string
- * @bool: Type of swap
- * Return: Swapped string
+ * @cmd: command string
+ * @bool: flag
+ * Return: modified string
  */
 char *swap_char(char *cmd, int bool)
 {
@@ -48,9 +48,9 @@ char *swap_char(char *cmd, int bool)
 }
 
 /**
- * split_line - Tokenizes the cmd string
+ * split_line - Tokenize command string
  *
- * @cmd: cmd string
+ * @cmd: command string
  * Return: String splitted
  */
 char **split_line(char *cmd)
@@ -77,7 +77,7 @@ char **split_line(char *cmd)
 		if (i == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
+			tokens = _reallocdptr(tokens, i, sizeof(char *) * bsize);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
@@ -94,8 +94,9 @@ char **split_line(char *cmd)
 
 
 /**
- * rev_string - Reverses a string in place.
- * @str: cmd string to be reversed.
+ * rev_string - Reverses string in place.
+ *
+ * @str: String to be modified
  * Return: void.
  */
 void rev_string(char *str)

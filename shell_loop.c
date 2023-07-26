@@ -3,7 +3,7 @@
 /**
  * without_comment - deletes comments from the cmd
  *
- * @in: cmd string
+ * @in: command string
  * Return: cmd without comments
  */
 char *without_comment(char *in)
@@ -39,7 +39,7 @@ char *without_comment(char *in)
  * shell_loop - Loop of shell
  * @curr_ctxt: ctxt relevant (argv, cmd, args)
  *
- * Return: no return.
+ * Return: void.
  */
 void shell_loop(context *curr_ctxt)
 {

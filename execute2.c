@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * cmd_exec - Execute command from given context
+ *
+ * @curr_ctxt: Relevant context.
+ * Return: 1.
+ */
 int cmd_exec(context *curr_ctxt)
 {
 	pid_t pd;
