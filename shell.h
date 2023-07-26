@@ -206,7 +206,7 @@ char *error_get_alias(char **args);
 char *error_env(context *curr_ctxt);
 char *error_syntax(char **args);
 char *error_permission(char **args);
-char *error_path_126(context *curr_ctxt);
+char *error_path(context *curr_ctxt);
 
 
 /* get_error.c */
